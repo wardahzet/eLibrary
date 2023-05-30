@@ -1,8 +1,10 @@
-package com.example.e_library;
+package com.example.e_library.layout_activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.e_library.R;
 
 public class MainActivity extends AppCompatActivity {
 
