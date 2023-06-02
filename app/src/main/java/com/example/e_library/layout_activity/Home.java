@@ -1,12 +1,15 @@
 package com.example.e_library.layout_activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -22,7 +25,7 @@ public class Home extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     ArrayList<BooksModel> data;
 
-    Button btn_search;
+    SearchView searchView;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -47,15 +50,31 @@ public class Home extends AppCompatActivity {
         adapterHome = new AdapterHome(data);
         recyclerView.setAdapter(adapterHome);
 
-        btn_search = findViewById(R.id.btn_search);
-
-        btn_search.setOnClickListener(new View.OnClickListener() {
+        searchView=findViewById(R.id.in_search);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View view) {
-                Intent int_search=new Intent(Home.this, SearchActivity.class);
-                startActivity(int_search);
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                newText = newText.toLowerCase();
+                ArrayList<BooksModel> itemFilter = new ArrayList<>();
+                for(BooksModel model : data){
+                    String nama = model.getTitle().toLowerCase();
+                    if(nama.contains(newText)){
+                        itemFilter.add(model);
+                    }
+                }
+                adapterHome.setFilter(itemFilter);
+                return true;
             }
         });
 
+
     }
-}
+
+
+    }

@@ -55,5 +55,11 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ViewHolder> {
         return dataBooks.size();
     }
 
+    void setFilter(ArrayList<BooksModel> filterModel){
+        dataBooks = new ArrayList<>();
+        dataBooks.addAll(filterModel);
+        notifyDataSetChanged();
+    }
+
 
 }

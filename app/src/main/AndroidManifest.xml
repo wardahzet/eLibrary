@@ -13,6 +13,18 @@
         android:theme="@style/Theme.ELibrary"
         tools:targetApi="31">
         <activity
+            android:name=".layout_activity.SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".layout_activity.Home"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".layout_activity.LoginPage"
             android:exported="false" />
         <activity
@@ -20,22 +32,13 @@
             android:exported="false" />
         <activity
             android:name=".layout_activity.StatusPeminjaman"
-            android:exported="false"
-            >
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".layout_activity.OnBoarding"
             android:exported="false" />
         <activity
             android:name=".layout_activity.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>
