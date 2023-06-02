@@ -5,4 +5,5 @@
     <color name="primary">#EA9901</color>
     <color name="dark_gray">#525252</color>
     <color name="gray">#D9D9D9</color>
+    <color name="light_gray">#ACACAC</color>
 </resources>
