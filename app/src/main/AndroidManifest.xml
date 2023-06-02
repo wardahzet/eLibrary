@@ -19,6 +19,9 @@
             android:name=".layout_activity.RegisterPage"
             android:exported="false" />
         <activity
+            android:name=".layout_activity.StatusPeminjaman"
+            android:exported="false" />
+        <activity
             android:name=".layout_activity.OnBoarding"
             android:exported="false" />
         <activity
