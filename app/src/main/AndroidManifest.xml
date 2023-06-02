@@ -20,7 +20,10 @@
             android:exported="false" />
         <activity
             android:name=".layout_activity.StatusPeminjaman"
-            android:exported="false" />
+            android:exported="false"
+            >
+
+        </activity>
         <activity
             android:name=".layout_activity.OnBoarding"
             android:exported="false" />
@@ -31,6 +34,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 
