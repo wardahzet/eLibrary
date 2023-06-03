@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">E-Library</string>
+    <string name="book_name">The Wizard of OZ</string>
+    <string name="book_author">By Lyman Frank Baum</string>
 </resources>

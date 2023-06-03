@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".layout_activity.DetailActivity">
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/ic_bg_btn_arrow"
+        android:padding="5dp"
+        android:src="@drawable/arrow2"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp"
+        tools:ignore="MissingConstraints"/>
+
+    <ImageView
+        android:id="@+id/ic_cover"
+        android:layout_width="233dp"
+        android:layout_height="329dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_books1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_back" />
+
+    <TextView
+        android:id="@+id/txt_bookname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/book_name"
+        android:textColor="@color/black"
+        android:textSize="60px"
+        android:layout_marginTop="12dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ic_cover" />
+
+    <TextView
+        android:id="@+id/txt_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/book_author"
+        android:layout_marginTop="8px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_bookname" />
+
+    <TextView
+        android:id="@+id/txt_synopsis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="36dp"
+        android:textStyle="bold"
+        android:text="Synopsis"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_author" />
+
+    <TextView
+        android:id="@+id/txt_bookparagraph"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:text="A Kansas farm girl named Dorothy ends up in the magical Land of Oz after she and her pet dog Toto are swept away from their home by a cyclone. Upon her arrival in the magical world of Oz, she learns she cannot return home until she has destroyed the Wicked Witch of the West."
+        android:justificationMode="inter_word"
+        android:layout_marginTop="24px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_synopsis" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_borrow"
+        android:layout_width="206dp"
+        android:layout_height="56dp"
+        android:background="@color/primary"
+        android:text="Borrow"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_wishlist"
+        android:layout_width="206dp"
+        android:layout_height="56dp"
+        android:background="@drawable/btn_orangeright"
+        android:text="Wishlist"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
