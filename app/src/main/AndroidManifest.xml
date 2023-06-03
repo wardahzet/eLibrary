@@ -36,7 +36,7 @@
             android:name=".layout_activity.OnBoarding"
             android:exported="false" />
         <activity
-            android:name=".layout_activity.wishlist.Display_wishlist"
+            android:name=".layout_activity.wishlist.Wishlist_Display"
             android:exported="false" />
         <activity
             android:name=".layout_activity.Profile"
