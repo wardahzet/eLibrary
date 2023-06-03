@@ -13,20 +13,23 @@
         android:paddingVertical="20dp"
         tools:ignore="MissingConstraints">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/in_search"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:background="@drawable/bg_in_search"
-            android:text="Search your book . . . . . " />
         <ImageButton
             android:id="@+id/ic_profile_user"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_marginLeft="230dp"
+            android:layout_marginLeft="5dp"
             android:src="@drawable/ic_profile_user"
             android:background="@color/white"
             android:layout_marginRight="10dp"/>
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/in_search"
+            android:layout_width="275dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_in_search"
+            app:queryHint="Search in here"
+            app:iconifiedByDefault="false"
+             />
+
         <ImageButton
             android:id="@+id/ic_wishlist"
             android:layout_width="40dp"
