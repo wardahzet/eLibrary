@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ELibrary"
         tools:targetApi="31">
+
         <activity
             android:name=".layout_activity.RentStatusActivity"
             android:exported="false" />
@@ -26,6 +27,7 @@
             android:exported="false" />
         <activity
             android:name=".layout_activity.Home"
+            android:name=".layout_activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,6 +35,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".layout_activity.Home"
+            android:exported="false"/>
         <activity
             android:name=".layout_activity.LoginPage"
             android:exported="false" />
@@ -40,14 +46,33 @@
             android:name=".layout_activity.RegisterPage"
             android:exported="false" />
         <activity
-            android:name=".layout_activity.StatusPeminjaman"
-            android:exported="false" />
-        <activity
             android:name=".layout_activity.OnBoarding"
             android:exported="false" />
         <activity
             android:name=".layout_activity.MainActivity"
             android:exported="true" />
+        <activity
+            android:name=".layout_activity.wishlist.Wishlist_Display"
+            android:exported="false" />
+        <activity
+            android:name=".layout_activity.Profile"
+            android:exported="false" />
+        <activity
+            android:name=".layout_activity.EditProfile"
+            android:exported="false" />
+        <activity
+            android:name=".layout_activity.HistoryActivity"
+            android:exported="false" />
+
+        <!--        <activity-->
+        <!--            android:name=".layout_activity.StatusPeminjaman"-->
+        <!--            android:exported="false" />-->
+
+        <!--        <activity-->
+        <!--            android:name=".layout_activity.SearchActivity"-->
+        <!--            android:exported="false" />-->
+
     </application>
+
 
 </manifest>

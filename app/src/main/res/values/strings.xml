@@ -2,4 +2,6 @@
     <string name="app_name">E-Library</string>
     <string name="book_name">The Wizard of OZ</string>
     <string name="book_author">By Lyman Frank Baum</string>
+    <string name="editProf"><u>Edit Profile</u></string>
+    <string name="changeImg"><u>Change Photo</u></string>
 </resources>
