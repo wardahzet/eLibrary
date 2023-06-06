@@ -1,7 +1,6 @@
 package com.example.e_library.layout_activity.wishlist;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,18 +13,32 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_library.R;
+import com.example.e_library.model.Book;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.makeramen.roundedimageview.RoundedImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyHolder> {
 
-    List <Wishlist> wishlistList;
-    private Context context;
+    List<Book> wishlistList;
+    List<Book> rentList = new ArrayList<>();
+    private final Activity context;
+    private final FirebaseDatabase firebaseDatabase;
+    private final DatabaseReference databaseReference;
+    private final FirebaseAuth mAuth;
 
-    public WishlistAdapter(Context context, List<Wishlist> wishlistList) {
-        this.context = context;
+
+    public WishlistAdapter(Activity activity, List<Book> wishlistList) {
+        this.context = activity;
         this.wishlistList = wishlistList;
+
+        mAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
     }
 
     @NonNull
@@ -38,36 +51,27 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyHold
 
     @Override
     public void onBindViewHolder(@NonNull WishlistAdapter.MyHolder holder, int position) {
-        Wishlist wishlists = wishlistList.get(position);
+        Book book = wishlistList.get(position);
 
-        holder.txt_judul.setText(wishlists.getJudul());
-        holder.txt_penulis.setText(wishlists.getPenulis());
-        holder.txt_genre.setText(wishlists.getGenre());
-        holder.ic_image.setImageResource(wishlists.getImage());
-        holder.cb_checkBox.setChecked(wishlists.isSelected());
-        holder.cb_checkBox.setTag(wishlists);
-
-        holder.cb_checkBox.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                CheckBox cb_check = (CheckBox) view;
-                Wishlist contact = (Wishlist) cb_check.getTag();
-
-                contact.setSelected(cb_check.isChecked());
-                wishlists.setSelected(cb_check.isChecked());
+        holder.txt_judul.setText(book.getTitle());
+        holder.txt_penulis.setText(book.getAuthor());
+//        holder.ic_image.setImageResource(book.getImage());
+        holder.cb_checkBox.setChecked(false);
+        holder.cb_checkBox.setTag(book);
 
 
-            }
-        });
-
-        holder.btn_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                removeItem(holder.getLayoutPosition());
-                Toast.makeText(context,"Delete",Toast.LENGTH_LONG).show();
-            }
-        });
+        holder.btn_delete.setOnClickListener(v ->
+                databaseReference.child("user").child(mAuth.getUid())
+                    .child("wishlist").child(book.getIsbn()).removeValue()
+                    .addOnSuccessListener(context, unused -> {
+                            Toast.makeText(context, "Berhasil Mengapus ke Wishlist",
+                                    Toast.LENGTH_SHORT).show();
+                            context.startActivity(context.getIntent());
+                    })
+                    .addOnFailureListener(context, e ->
+                            Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                    )
+        );
     }
 
     @Override
@@ -93,13 +97,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyHold
 
         }
     }
-//========cobaaaaaa
-    public List<Wishlist> getWishlistList() {
-        return wishlistList;
-    }
-    private void removeItem(int position) {
-       wishlistList.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, wishlistList.size());
+    public List<Book> getWishlistList() {
+        return rentList;
     }
 }

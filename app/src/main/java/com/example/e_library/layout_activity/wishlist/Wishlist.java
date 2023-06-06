@@ -4,17 +4,14 @@ public class Wishlist {
     private String judul, penulis, genre;
     private int image;
     private boolean isSelected = false;
-
     public Wishlist(){
     }
-
     public Wishlist(String judul, String penulis, String genre, int image) {
         this.judul = judul;
         this.penulis = penulis;
         this.genre = genre;
         this.image = image;
     }
-
     public String getJudul() {
         return judul;
     }
@@ -39,11 +36,9 @@ public class Wishlist {
     public void setImage(int image) {
         this.image = image;
     }
-
     public boolean isSelected() {
         return isSelected;
     }
-
     public void setSelected(boolean selected) {
         isSelected = selected;
     }

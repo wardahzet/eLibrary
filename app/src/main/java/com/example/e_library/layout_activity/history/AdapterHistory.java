@@ -1,4 +1,4 @@
-package com.example.e_library.layout_activity;
+package com.example.e_library.layout_activity.history;
 
 import android.view.LayoutInflater;
 import android.view.View;

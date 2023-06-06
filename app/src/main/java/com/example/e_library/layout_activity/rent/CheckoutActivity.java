@@ -1,4 +1,4 @@
-package com.example.e_library.layout_activity;
+package com.example.e_library.layout_activity.rent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,16 +9,16 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.e_library.R;
+import com.example.e_library.layout_activity.book_detail.DetailActivity;
+import com.example.e_library.model.Book;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 
 public class CheckoutActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button btn_back, btn_submit_form;
+    Book book;
     TextView txt_co, txt_name, txt_email, txt_id, txt_phone, txt_bookname, txt_bookauthor, txt_bookid, txt_bookgenre, txt_rent_id, txt_rent_date, txt_return_date, txt_rent_id_num, txt_rent_date_fill, txt_return_date_fill;
 
     @Override
@@ -42,6 +42,9 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         txt_rent_id_num = findViewById(R.id.txt_rent_id_num);
         txt_rent_date_fill = findViewById(R.id.txt_rent_date_fill);
         txt_return_date_fill = findViewById(R.id.txt_return_date_fill);
+
+        book = (Book) getIntent().getSerializableExtra("book");
+
 
         LocalDate rentDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");

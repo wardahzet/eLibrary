@@ -1,4 +1,4 @@
-package com.example.e_library.layout_activity;
+package com.example.e_library.layout_activity.rent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.e_library.R;
+import com.example.e_library.layout_activity.Home;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     app:layoutDescription="@xml/activity_main_scene"
-    tools:context=".layout_activity.MainActivity">
+    tools:context=".layout_activity.auth.MainActivity">
 
     <ImageView
         android:id="@+id/ic_logo"

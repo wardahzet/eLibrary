@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "119292027310",
-    "firebase_url": "https://e-library-ff911-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "e-library-ff911",
-    "storage_bucket": "e-library-ff911.appspot.com"
+    "project_number": "977652038303",
+    "firebase_url": "https://ilibreri-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "ilibreri",
+    "storage_bucket": "ilibreri.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:119292027310:android:bfc89379b59b29e014a83f",
+        "mobilesdk_app_id": "1:977652038303:android:5f23d90a411ef9c4c940aa",
         "android_client_info": {
           "package_name": "com.example.e_library"
         }
       },
       "oauth_client": [
         {
-          "client_id": "119292027310-v70sstin4ttq42bhjni0as39ban6hhno.apps.googleusercontent.com",
+          "client_id": "977652038303-h04f5r694b9iucv28t9i9c6p2n35g40q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.e_library",
+            "certificate_hash": "35fbc1c302bff728498edcc813b9d18f4ddf39dc"
+          }
+        },
+        {
+          "client_id": "977652038303-opeqh32vufegkd3pfvc5psa30leblcv2.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAQ6LWXr0oQcEa_QDQffnnB4QKIcuBHfIo"
+          "current_key": "AIzaSyCJXiE4TW2KV-WXvopa8u7DYkOUJiX3wDs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "119292027310-v70sstin4ttq42bhjni0as39ban6hhno.apps.googleusercontent.com",
+              "client_id": "977652038303-5pte6pvo03asmjrekekmhlom8vjq33u5.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

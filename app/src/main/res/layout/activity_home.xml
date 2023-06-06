@@ -21,6 +21,7 @@
             android:src="@drawable/ic_profile_user"
             android:background="@color/white"
             android:layout_marginRight="10dp"/>
+
         <androidx.appcompat.widget.SearchView
             android:id="@+id/in_search"
             android:layout_width="275dp"

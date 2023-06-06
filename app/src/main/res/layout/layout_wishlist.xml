@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".layout_activity.wishlist.Wishlist_Display">
+    tools:context=".layout_activity.wishlist.WishlistActivity">
 
     <LinearLayout
         android:id="@+id/layoutHeader"

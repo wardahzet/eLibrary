@@ -1,4 +1,4 @@
-package com.example.e_library.layout_activity;
+package com.example.e_library.layout_activity.history;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
