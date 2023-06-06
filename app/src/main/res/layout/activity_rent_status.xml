@@ -9,29 +9,27 @@
     <LinearLayout
         android:id="@+id/layout_nav_rent_status"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="70dp"
         android:elevation="80dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:background="@drawable/bg_card_white"
         tools:ignore="MissingConstraints"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="20dp"
-            android:background="@drawable/ic_bg_btn_arrow"
+            android:background="@drawable/btn_back_group"
             android:padding="5dp"
             android:src="@drawable/arrow2"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="16dp"
-            tools:ignore="MissingConstraints"/>
+            tools:layout_editor_absoluteX="6dp"
+            tools:layout_editor_absoluteY="46dp" />
 
         <TextView
-            android:id="@+id/txt_co"
+            android:id="@+id/txt_rent_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rent Status"
