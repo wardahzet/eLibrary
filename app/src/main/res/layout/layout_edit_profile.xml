@@ -114,7 +114,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
-            android:text="Username"
+            android:text="Phone Number"
             android:textSize="16sp"
             android:textColor="@color/black"
             android:fontFamily="sans-serif-medium"
@@ -128,57 +128,13 @@
             android:background="@drawable/in_bg_edit_prof"
             android:drawableRight="@drawable/in_verified"
             android:paddingRight="20dp"
-            android:text="alifia123"
+            android:text="0896168768790"
             android:inputType="text"
             android:paddingLeft="20dp"
             android:textColor="@color/black"
             android:textColorHint="#767676" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:text="Email"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:fontFamily="sans-serif-medium"
-            android:textStyle="bold"
-            />
-        <EditText
-            android:id="@+id/in_email"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/in_bg_edit_prof"
-            android:drawableRight="@drawable/in_verified"
-            android:paddingRight="20dp"
-            android:text="alifia.putri@gmail.com"
-            android:inputType="text"
-            android:paddingLeft="20dp"
-            android:textColor="@color/black"
-            android:textColorHint="#767676" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:text="Password"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:fontFamily="sans-serif-medium"
-            android:textStyle="bold"
-            />
-        <EditText
-            android:id="@+id/in_password"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/in_bg_edit_prof"
-            android:text="AlifiaAja123"
-            android:inputType="textPassword"
-            android:paddingLeft="20dp"
-            android:textColor="@color/black"
-            android:textColorHint="#767676" />
 
             <Button
                 android:id="@+id/btn_save"
