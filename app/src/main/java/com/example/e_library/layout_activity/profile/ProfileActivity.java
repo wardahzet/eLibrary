@@ -14,6 +14,9 @@ import com.example.e_library.R;
 import com.example.e_library.layout_activity.Home;
 import com.example.e_library.layout_activity.auth.OnBoarding;
 import com.example.e_library.layout_activity.history.HistoryActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -23,6 +26,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             txt_name2, txt_studentID2,txt_Uname,
             txt_email,txt_pwd;
     Button btn_back,btn_history,btn_logout;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
+    private FirebaseAuth mAuth;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -45,6 +51,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         btn_history = findViewById(R.id.btn_history);
         btn_logout = findViewById(R.id.btn_logout);
 
+        mAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+
         btn_back.setOnClickListener(this);
         txt_editProfile.setOnClickListener(this);
         btn_history.setOnClickListener(this);
@@ -65,7 +75,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
            startActivity(new Intent(ProfileActivity.this, HistoryActivity.class));
        }
        else if (view.getId()==R.id.btn_logout){
-           //
+           mAuth.signOut();
+           Intent intent = new Intent(ProfileActivity.this, OnBoarding.class);
+           intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+           startActivity(intent);
            startActivity(new Intent(ProfileActivity.this, OnBoarding.class));
         }
     }
