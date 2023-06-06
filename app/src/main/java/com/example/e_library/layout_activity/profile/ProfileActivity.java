@@ -1,4 +1,4 @@
-package com.example.e_library.layout_activity;
+package com.example.e_library.layout_activity.profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,10 +11,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.e_library.R;
+import com.example.e_library.layout_activity.Home;
+import com.example.e_library.layout_activity.auth.OnBoarding;
+import com.example.e_library.layout_activity.history.HistoryActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Profile extends AppCompatActivity implements View.OnClickListener {
+public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
     private CircleImageView ic_profileImg;
     private TextView txt_name1,txt_studentID1,txt_editProfile, txt_status,
             txt_name2, txt_studentID2,txt_Uname,
@@ -53,17 +56,17 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
        if(view.getId()== R.id.txt_editProfile) {
-           startActivity(new Intent(Profile.this, EditProfile.class));
+           startActivity(new Intent(ProfileActivity.this, EditProfile.class));
        }
        else if (view.getId()==R.id.btn_back) {
-           startActivity(new Intent(Profile.this, Home.class ));
+           startActivity(new Intent(ProfileActivity.this, Home.class ));
        }
        else if (view.getId()==R.id.btn_history) {
-           startActivity(new Intent(Profile.this, HistoryActivity.class));
+           startActivity(new Intent(ProfileActivity.this, HistoryActivity.class));
        }
        else if (view.getId()==R.id.btn_logout){
            //
-           startActivity(new Intent(Profile.this, OnBoarding.class));
+           startActivity(new Intent(ProfileActivity.this, OnBoarding.class));
         }
     }
 }
