@@ -2,6 +2,7 @@ package com.example.e_library.layout_activity.auth;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,8 +16,14 @@ import android.widget.Toast;
 
 import com.example.e_library.R;
 import com.example.e_library.layout_activity.Home;
+import com.example.e_library.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
@@ -25,6 +32,8 @@ public class RegisterPage extends AppCompatActivity implements View.OnClickListe
     private EditText in_username, in_email, in_password, in_confPass;
     private Button btn_back,btn_signUp;
     private FirebaseAuth mAuth;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +51,8 @@ public class RegisterPage extends AppCompatActivity implements View.OnClickListe
         btn_signUp.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
     }
 
     @Override
@@ -62,6 +73,8 @@ public class RegisterPage extends AppCompatActivity implements View.OnClickListe
                 if (task.isSuccessful()) {
                     Log.d(TAG, "createUserWithEmail:success");
                     FirebaseUser user = mAuth.getCurrentUser();
+                    User userNew = new User(in_username.getText().toString(), in_email.getText().toString());
+                    databaseReference.child(user.getUid()).setValue(userNew);
                     updateUI(user);
                     assert user != null;
                 } else {
