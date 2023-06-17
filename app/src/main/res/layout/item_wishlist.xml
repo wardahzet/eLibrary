@@ -39,6 +39,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="10dp"
             android:maxLines="1"
+            android:ellipsize="end"
             android:text="Judul"
             android:textColor="@color/black"
             android:textSize="18dp"

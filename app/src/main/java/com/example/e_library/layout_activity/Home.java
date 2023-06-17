@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.example.e_library.R;
@@ -70,12 +71,12 @@ public class Home extends AppCompatActivity {
                     Book book = item.getValue(Book.class);
                     bookList.add(book);
                 }
+
                 adapterHome = new AdapterHome(bookList,Home.this);
                 recyclerView.setAdapter(adapterHome);
                 searchView = findViewById(R.id.in_search);
                 searchView.clearFocus();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

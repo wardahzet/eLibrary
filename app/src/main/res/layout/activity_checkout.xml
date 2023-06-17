@@ -9,25 +9,26 @@
     <LinearLayout
         android:id="@+id/layout_nav_checkout"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="52dp"
         android:elevation="80dp"
-        android:background="@drawable/bg_navbar"
         android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:background="@drawable/bg_card_white"
         tools:ignore="MissingConstraints"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/btn_back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:background="@drawable/btn_back_group"
+            android:background="@drawable/ic_bg_btn_arrow"
             android:padding="5dp"
             android:src="@drawable/arrow2"
-            tools:layout_editor_absoluteX="6dp"
-            tools:layout_editor_absoluteY="46dp" />
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp"
+            tools:ignore="MissingConstraints"/>
 
         <TextView
             android:id="@+id/txt_co"
@@ -47,19 +48,17 @@
         android:id="@+id/layout_profileco"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="10dp"
-        tools:ignore="MissingConstraints"
         android:background="@drawable/bg_card_white"
         android:elevation="20dp"
+        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_nav_checkout">
+        app:layout_constraintTop_toBottomOf="@+id/layout_nav_checkout"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:id="@+id/linear_profile1"
             android:layout_width="180dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="24dp"
             android:orientation="vertical"
             android:paddingTop="8dp">
 
@@ -104,179 +103,54 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-<!--        value from profile-->
         <LinearLayout
             android:id="@+id/linear_profile2"
             android:layout_width="180dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="230dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="0sp"
+            android:gravity="end"
             android:orientation="vertical">
-            
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" 
-                android:text=""/>
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/layout_bookco"
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="8dp"
-        tools:ignore="MissingConstraints"
-        android:background="@drawable/bg_card_white"
-        android:elevation="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_profileco">
-
-        <LinearLayout
-            android:id="@+id/layout_detailbookco"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_card_white"
-            android:elevation="80dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            tools:ignore="MissingConstraints">
-
-            <ImageView
-                android:layout_width="92dp"
-                android:layout_height="120dp"
-                android:layout_marginLeft="24dp"
-                android:src="@drawable/ic_books1"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="16dp" />
-
-
-            <LinearLayout
-                android:layout_width="270dp"
-                android:layout_height="119dp"
-                android:layout_marginLeft="18dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txt_bookname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/book_name"
-                    android:textColor="@color/black"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/txt_bookauthor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/book_author" />
-
-                <TextView
-                    android:id="@+id/txt_bookid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="9786020664156" />
-
-                <TextView
-                    android:id="@+id/txt_bookgenre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="Fiction" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/layout_billco"
-        android:layout_width="match_parent"
-        android:layout_height="144dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="8dp"
-        tools:ignore="MissingConstraints"
-        android:background="@drawable/bg_card_white"
-        android:elevation="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_bookco">
-
-        <LinearLayout
-            android:id="@+id/linear_bill1"
-            android:layout_width="180dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="24dp"
-            android:orientation="vertical"
-            android:paddingTop="18dp">
 
             <TextView
-                android:id="@+id/txt_rent_id"
+                android:id="@+id/in_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="Rent ID Number"
+                android:text="Name"
                 android:textColor="@color/black"
                 android:textSize="36px"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txt_rent_date"
+                android:id="@+id/in_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="Rent Date"
+                android:text="Email"
                 android:textColor="@color/black"
                 android:textSize="36px"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txt_return_date"
+                android:id="@+id/in_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="Return Date"
+                android:text="Student ID"
                 android:textColor="@color/black"
                 android:textSize="36px"
                 android:textStyle="bold" />
-        </LinearLayout>
-
-        <!--        value from date -->
-        <LinearLayout
-            android:id="@+id/linear_bill2"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="260dp"
-            android:orientation="vertical"
-            android:paddingTop="18dp">
 
             <TextView
-                android:id="@+id/txt_rent_id_num"
+                android:id="@+id/in_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="PIB-25112-AIIS"
-                android:textSize="36px" />
-
-            <TextView
-                android:id="@+id/txt_rent_date_fill"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:textSize="36px" />
-
-            <TextView
-                android:id="@+id/txt_return_date_fill"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text=""
-                android:textSize="36px" />
+                android:text="Phone Number"
+                android:textColor="@color/black"
+                android:textSize="36px"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
@@ -285,11 +159,23 @@
         android:id="@+id/btn_submit_form"
         android:layout_width="match_parent"
         android:layout_height="52dp"
+        android:background="@color/primary"
         android:text="Submit Form"
-        android:textSize="20dp"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:background="@color/primary"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_checkout"
+        android:layout_width="match_parent"
+        android:layout_height="465dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="55dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_submit_form"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_profileco"
+        tools:listitem="@layout/list_checkout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

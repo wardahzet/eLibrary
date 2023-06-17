@@ -1,11 +1,14 @@
 package com.example.e_library.layout_activity.wishlist;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,11 +17,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_library.R;
 import com.example.e_library.model.Book;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.makeramen.roundedimageview.RoundedImageView;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +38,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyHold
     private final Activity context;
     private final FirebaseDatabase firebaseDatabase;
     private final DatabaseReference databaseReference;
+    private final FirebaseStorage storage;
     private final FirebaseAuth mAuth;
-
-
     public WishlistAdapter(Activity activity, List<Book> wishlistList) {
         this.context = activity;
         this.wishlistList = wishlistList;
@@ -39,8 +47,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyHold
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
+        storage = FirebaseStorage.getInstance();
     }
-
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -55,9 +63,26 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyHold
 
         holder.txt_judul.setText(book.getTitle());
         holder.txt_penulis.setText(book.getAuthor());
-//        holder.ic_image.setImageResource(book.getImage());
+        StorageReference reference = storage.getReference("books_cover/" + book.getCover());
+        try {
+            File img = File.createTempFile("tempImage",book.getCover().endsWith("jpg") ? "jpg" : "png");
+            reference.getFile(img).addOnSuccessListener(taskSnapshot -> {
+                Bitmap bitmap = BitmapFactory.decodeFile(img.getAbsolutePath());
+                holder.ic_image.setImageBitmap(bitmap);
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         holder.cb_checkBox.setChecked(false);
         holder.cb_checkBox.setTag(book);
+        holder.cb_checkBox.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (b) {
+                rentList.add(book);
+            } else {
+                rentList.remove(book);
+            }
+
+        });
 
 
         holder.btn_delete.setOnClickListener(v ->

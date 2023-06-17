@@ -45,194 +45,74 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/layout_rent_success"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="10dp"
-        tools:ignore="MissingConstraints"
-        app:cardBackgroundColor="#FFFAEF"
+        android:layout_height="match_parent"
         android:elevation="20dp"
+        android:orientation="horizontal"
+        app:cardBackgroundColor="#FFFAEF"
+        app:layout_constraintBottom_toTopOf="@+id/btn_finish"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_nav_rent_status">
+        app:layout_constraintTop_toBottomOf="@+id/layout_nav_rent_status"
+        tools:ignore="MissingConstraints">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="378dp"
+            android:layout_height="378dp"
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="60dp"
                 android:src="@drawable/ic_success"
-                android:layout_gravity="top|center"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="43dp"
                 android:text="Rent Success!"
                 android:textColor="@color/primary"
                 android:textSize="20dp"
                 android:textStyle="bold"
-                android:layout_gravity="center_horizontal" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
                 android:text="Transaction rent successfully with"
                 android:textAlignment="center"
-                android:layout_marginTop="6dp"
-                android:layout_gravity="center_horizontal"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.503"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <TextView
+                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="38dp"
                 android:text="E-Library"
-                android:textStyle="bold"
                 android:textAlignment="center"
-                android:layout_gravity="center_horizontal"/>
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/layout_rent_details"
-        android:layout_width="match_parent"
-        android:layout_height="320dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="10dp"
-        tools:ignore="MissingConstraints"
-        android:background="@drawable/bg_card_white"
-        android:elevation="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_rent_success">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rent Details"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="30dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="46dp"
-            android:layout_marginLeft="30dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Book Title"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:layout_marginTop="20dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Authors"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:layout_marginTop="20dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Quantity"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:layout_marginTop="20dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rent ID Number"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:layout_marginTop="20dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rent Date"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:layout_marginTop="20dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Return Date"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:layout_marginTop="20dp"/>
-
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="135dp"
-                android:gravity="right">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/book_name"
-                    android:layout_marginTop="20dp"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="L. Frank Baum"
-                    android:layout_marginTop="20dp"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1"
-                    android:layout_marginTop="20dp"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="PIB-25112-AIIS    "
-                    android:layout_marginTop="20dp"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:id="@+id/txt_rent_date_fill"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:id="@+id/txt_return_date_fill"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:textColor="@color/black"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
@@ -240,11 +120,11 @@
         android:id="@+id/btn_finish"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:text="Finish"
-        android:textSize="20dp"
+        android:background="@color/primary"
+        android:text="Details"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:background="@color/primary"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 

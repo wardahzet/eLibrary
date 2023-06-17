@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="328dp"
@@ -38,6 +39,8 @@
                     android:id="@+id/txt_booktitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:text="The Wiszard of 0Z"
                     android:layout_marginTop="12dp"
                     android:textStyle="bold"
@@ -47,6 +50,8 @@
                     android:id="@+id/txt_bookautor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:layout_marginTop="5dp"
                     android:text="L.Frank Baum"
                     android:textSize="14dp"

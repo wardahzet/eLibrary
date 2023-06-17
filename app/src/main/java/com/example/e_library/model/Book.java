@@ -1,5 +1,7 @@
 package com.example.e_library.model;
 
+import android.net.Uri;
+
 import java.io.Serializable;
 
 public class Book implements Serializable {
@@ -8,7 +10,17 @@ public class Book implements Serializable {
     private String title;
     private String author;
     private String synopsis;
-//    private String cover;
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    private String publisher;
+    private String cover;
 
     public Book(String isbn, String title, String author, String synopsis){
         this.setIsbn(isbn);
@@ -20,7 +32,12 @@ public class Book implements Serializable {
     public Book(){
 
     }
-
+    public String getCover() {
+        return cover;
+    }
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
     public String getKey() {
         return key;
     }
