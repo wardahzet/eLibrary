@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="com.google.android.gms.permission.GOOGLE_AUTH" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,7 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ELibrary"
         tools:targetApi="31">
-
+        <activity
+            android:name=".layout_activity.profile.CropActivity"
+            android:exported="false" />
         <activity
             android:name=".layout_activity.rent.RentStatusActivity"
             android:exported="false" />
@@ -32,10 +38,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".layout_activity.Home"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".layout_activity.auth.LoginPage"
             android:exported="false" />
@@ -57,7 +62,10 @@
         <activity
             android:name=".layout_activity.history.HistoryActivity"
             android:exported="false" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
-
 
 </manifest>

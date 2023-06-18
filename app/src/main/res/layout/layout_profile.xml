@@ -193,16 +193,16 @@
             android:background="@color/black"
             app:layout_constraintTop_toBottomOf="@id/header"
             />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
-            android:text="Username"
-            android:textSize="16sp"
-            android:textColor="@color/black"
             android:fontFamily="sans-serif-medium"
-            android:textStyle="bold"
-            />
+            android:text="Nomor Telepon"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txt_Username"
@@ -251,37 +251,8 @@
             android:background="@color/black"
             app:layout_constraintTop_toBottomOf="@id/header"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:text="Password"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:fontFamily="sans-serif-medium"
-            android:textStyle="bold"
-            />
 
-        <TextView
-            android:id="@+id/txt_Password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="18dp"
-            android:text="AlifiaAja123"
-            android:textSize="16dp"
-            android:paddingLeft="20dp"
-            android:textColor="@color/black"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="6dp"
-            android:background="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/header"
-            />
-
-    <LinearLayout
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

@@ -18,8 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.e_library.R;
 import com.example.e_library.layout_activity.book_detail.DetailActivity;
 import com.example.e_library.model.Book;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -54,12 +52,9 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ViewHolder> {
 
         try {
             File img = File.createTempFile("tempImage",book.getCover().endsWith("jpg") ? "jpg" : "png");
-            reference.getFile(img).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(img.getAbsolutePath());
-                    holder.bookcover.setImageBitmap(bitmap);
-                }
+            reference.getFile(img).addOnSuccessListener(taskSnapshot -> {
+                Bitmap bitmap = BitmapFactory.decodeFile(img.getAbsolutePath());
+                holder.bookcover.setImageBitmap(bitmap);
             });
         } catch (IOException e) {
             e.printStackTrace();
@@ -83,7 +78,7 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView booktitle , bookauthor;
         ImageView bookcover;
         CardView cardBook;

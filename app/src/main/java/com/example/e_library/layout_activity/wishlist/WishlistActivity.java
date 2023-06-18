@@ -58,11 +58,11 @@ public class WishlistActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("user").child(mAuth.getUid());
-        validateUser();
 
         getWishlist();
     }
     private void checkout() {
+        validateUser();
         rents = _wishlistAdapter.getWishlistList();
         Intent intent = new Intent(WishlistActivity.this,CheckoutActivity.class);
         intent.putExtra("books", (ArrayList<Book>) rents);
@@ -99,7 +99,7 @@ public class WishlistActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
-                if (user.getStudentId() == null) {
+                if (user.getStudentId().equals("") ||user.getPhoneNumber().equals("")) {
                     Toast.makeText(WishlistActivity.this, "Profile Belum Lengkap",
                             Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(WishlistActivity.this, EditProfile.class));
@@ -131,6 +131,8 @@ public class WishlistActivity extends AppCompatActivity {
                                             && Objects.equals(rent.getBook().getIsbn(), book.getIsbn())) {
                                         Toast.makeText(WishlistActivity.this
                                                 ,"Anda sudah meminjam buku" + book.getKey(), Toast.LENGTH_SHORT).show();
+                                        finish();
+                                        startActivity(getIntent());
                                     }
 
                                 }

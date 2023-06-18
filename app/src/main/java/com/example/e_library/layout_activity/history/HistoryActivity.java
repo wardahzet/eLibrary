@@ -1,18 +1,15 @@
 package com.example.e_library.layout_activity.history;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
-
 import com.example.e_library.R;
-import com.example.e_library.layout_activity.wishlist.WishlistActivity;
-import com.example.e_library.layout_activity.wishlist.WishlistAdapter;
 import com.example.e_library.model.Rent;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;

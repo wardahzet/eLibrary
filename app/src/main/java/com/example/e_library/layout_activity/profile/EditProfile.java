@@ -6,33 +6,36 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.e_library.R;
 import com.example.e_library.model.User;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
+import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -47,6 +50,7 @@ public class EditProfile extends AppCompatActivity{
     private User user;
     private Uri imgUri;
     private FirebaseStorage storage;
+    private ActivityResultLauncher<String> cropImage;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,38 +62,59 @@ public class EditProfile extends AppCompatActivity{
         txt_changePhoto = findViewById(R.id.txt_editImg);
         in_name = findViewById(R.id.in_Name2);
         in_studentID = findViewById(R.id.in_studentID);
-        in_email = findViewById(R.id.in_email);
+        in_email = findViewById(R.id.in_phoneNumber);
         btn_save = findViewById(R.id.btn_save);
 
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("user").child(mAuth.getUid());
         storage = FirebaseStorage.getInstance();
-
         getUser();
+        cropImage = registerForActivityResult(new ActivityResultContracts.GetContent(), result -> {
+            Intent intent = new Intent(EditProfile.this, CropActivity.class);
+            intent.putExtra("SendImageData", result.toString());
+            startActivityForResult(intent, 100);
+        });
 
         txt_changePhoto.setOnClickListener(v -> {
-            Intent intent = new Intent();
-            intent.setType("img/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(intent,100);
+            cropImage.launch("image/*");
+//            Intent intent = new Intent(Intent.ACTION_PICK);
+////            intent.setType("img/*");
+//            intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//            startActivityForResult(intent,100);
         });
         btn_save.setOnClickListener(v -> change());
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 100 && data != null && data.getData() != null) {
-             imgUri = data.getData();
-             image.setImageURI(imgUri);
+        if (requestCode == 100 && resultCode == 101) {
+            String result = data.getStringExtra("CROP");
+            imgUri = data.getData();
+            if(result != null) {
+                imgUri = Uri.parse(result);
+            }
+            Toast.makeText(EditProfile.this, String.valueOf(imgUri), Toast.LENGTH_SHORT).show();
+            Log.d("TAG", String.valueOf(imgUri));
+            image.setImageURI(imgUri);
+        } else if (resultCode == UCrop.RESULT_ERROR) {
+            final Throwable cropError = UCrop.getError(data);
         }
     }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (requestCode == 100 && data != null && data.getData() != null) {
+//             imgUri = data.getData();
+//             image.setImageURI(imgUri);
+//        }
+//    }
     private void change() {
         user.setName(in_name.getText().toString());
-        user.setEmail(in_email.getText().toString());
+        user.setPhoneNumber(in_email.getText().toString());
         user.setStudentId(in_studentID.getText().toString());
         user.setPhoto(uploadImage());
         databaseReference.setValue(user)
@@ -110,10 +135,11 @@ public class EditProfile extends AppCompatActivity{
         if (extension != null) {
             type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
         }
-        StorageReference reference = FirebaseStorage.getInstance().getReference().child("users")
-                .child(mAuth + "." + type);
-        Task<UploadTask.TaskSnapshot> task = reference.putFile(imgUri);
-        return mAuth + type;
+        StorageReference reference = FirebaseStorage.getInstance().getReference().child("users_profile")
+                .child(mAuth.getUid());
+        reference.putFile(imgUri);
+
+        return mAuth.getUid();
     }
 
     private void getUser() {
@@ -125,7 +151,7 @@ public class EditProfile extends AppCompatActivity{
                 in_name.setText(user.getName());
 
                 in_studentID.setText(user.getStudentId());
-                in_email.setText(user.getEmail());
+                in_email.setText(user.getPhoneNumber());
                 if(!user.getPhoto().isEmpty()) setImage(user.getPhoto());
             }
             @Override
@@ -135,16 +161,13 @@ public class EditProfile extends AppCompatActivity{
         });
     }
     private void setImage(String photo) {
-        StorageReference reference = storage.getReference("users_profile/" + user.getPhoto());
+        StorageReference reference = storage.getReference("users_profile/" + photo);
 
         try {
-            File img = File.createTempFile("tempImage",user.getPhoto().endsWith("jpg") ? "jpg" : "png");
-            reference.getFile(img).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(img.getAbsolutePath());
-                    image.setImageBitmap(bitmap);
-                }
+            File img = File.createTempFile("tempImage",photo.endsWith("jpg") ? "jpg" : "");
+            reference.getFile(img).addOnSuccessListener(taskSnapshot -> {
+                Bitmap bitmap = BitmapFactory.decodeFile(img.getAbsolutePath());
+                image.setImageBitmap(bitmap);
             });
         } catch (IOException e) {
             e.printStackTrace();

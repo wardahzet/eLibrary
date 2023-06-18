@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,11 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_library.R;
 import com.example.e_library.model.Book;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -104,7 +101,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyHold
         return wishlistList.size();
     }
 
-    public class MyHolder extends RecyclerView.ViewHolder {
+    public static class MyHolder extends RecyclerView.ViewHolder {
         RoundedImageView ic_image;
         TextView txt_judul,txt_penulis,txt_genre;
         CheckBox cb_checkBox;

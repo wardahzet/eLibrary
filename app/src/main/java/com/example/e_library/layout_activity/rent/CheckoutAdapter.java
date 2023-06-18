@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_library.R;
 import com.example.e_library.model.Book;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -47,12 +45,9 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
         StorageReference reference = storage.getReference("books_cover/" + book.getCover());
         try {
             File img = File.createTempFile("tempImage",book.getCover().endsWith("jpg") ? "jpg" : "png");
-            reference.getFile(img).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(img.getAbsolutePath());
-                    holder.ic_cover.setImageBitmap(bitmap);
-                }
+            reference.getFile(img).addOnSuccessListener(taskSnapshot -> {
+                Bitmap bitmap = BitmapFactory.decodeFile(img.getAbsolutePath());
+                holder.ic_cover.setImageBitmap(bitmap);
             });
         } catch (IOException e) {
             e.printStackTrace();
@@ -64,7 +59,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
         return books.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView title, author, isbn;
         ImageView ic_cover;
         public ViewHolder(@NonNull View itemView) {

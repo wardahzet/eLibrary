@@ -23,22 +23,18 @@ import com.example.e_library.layout_activity.wishlist.WishlistActivity;
 import com.example.e_library.model.Book;
 import com.example.e_library.model.Rent;
 import com.example.e_library.model.User;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class DetailActivity extends AppCompatActivity implements View.OnClickListener {
@@ -103,36 +99,42 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(new Intent(DetailActivity.this, Home.class));
             finish();
         } else if (view.getId() == R.id.btn_borrow) {
-            checkUser();
-            databaseReference.child("user").child(mAuth.getUid())
-                    .child("rent")
-                    .addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
-                                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                                    Rent rent = snapshot1.getValue(Rent.class);
-                                    if ((rent.getStatus().equals("Dipesan") || rent.getStatus().equals("Dipinjam"))
-                                            && Objects.equals(rent.getBook().getIsbn(), book.getIsbn())) {
-                                        Toast.makeText(DetailActivity.this
-                                                ,"Anda sudah meminjam buku" + book.getKey(), Toast.LENGTH_SHORT).show();
-                                    }
-
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            Toast.makeText(DetailActivity.this
-                                    ,"error" + book.getKey(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            storeRent();
+            ArrayList<Book> rents = new ArrayList<Book>();
+            rents.add(book);
+            Intent intent = new Intent(DetailActivity.this, CheckoutActivity.class);
+            intent.putExtra("books", (ArrayList<Book>) rents);
         } else if (view.getId() == R.id.btn_wishlist) {
             storeWishlist();
         }
     }
+    private void storeRent(){
+        checkUser();
+        databaseReference.child("user").child(mAuth.getUid())
+                .child("rent")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
+                            for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                                Rent rent = snapshot1.getValue(Rent.class);
+                                if ((rent.getStatus().equals("Dipesan") || rent.getStatus().equals("Dipinjam"))
+                                        && Objects.equals(rent.getBook().getIsbn(), book.getIsbn())) {
+                                    Toast.makeText(DetailActivity.this
+                                            ,"Anda sudah meminjam buku" + book.getKey(), Toast.LENGTH_SHORT).show();
 
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(DetailActivity.this
+                                ,"error" + book.getKey(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
     private void storeWishlist() {
         databaseReference.child("wishlist").child(book.getIsbn()).setValue(book)
                 .addOnSuccessListener(this, unused ->
@@ -148,7 +150,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
-                if (user == null || user.getStudentId() == null) {
+                if (user.getStudentId().equals("") ||user.getPhoneNumber().equals("")) {
                     Toast.makeText(DetailActivity.this, "Profile Belum Lengkap",
                             Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(DetailActivity.this, EditProfile.class));

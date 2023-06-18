@@ -62,8 +62,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         txt_name2 =findViewById(R.id.txt_Name2);
         txt_studentID2 =findViewById(R.id.txt_studentID2);
         txt_email =findViewById(R.id.txt_Email);
-        txt_pwd = findViewById(R.id.txt_Password);
-        txt_pwd.setTransformationMethod(new PasswordTransformationMethod());
         btn_back = findViewById(R.id.btn_back);
         btn_history = findViewById(R.id.btn_history);
         btn_logout = findViewById(R.id.btn_logout);
@@ -97,20 +95,17 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void setImage(String photo) {
-        StorageReference reference = storageReference.getReference(photo);
+        StorageReference reference = storageReference.getReference("users_profile/" + photo);
+
         try {
-            File img = File.createTempFile("tempImage","jpg");
-            reference.getFile(img).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(img.getAbsolutePath());
-                    ic_profileImg.setImageBitmap(bitmap);
-                }
+            File img = File.createTempFile("tempImage",photo.endsWith("jpg") ? "jpg" : "");
+            reference.getFile(img).addOnSuccessListener(taskSnapshot -> {
+                Bitmap bitmap = BitmapFactory.decodeFile(img.getAbsolutePath());
+                ic_profileImg.setImageBitmap(bitmap);
             });
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     @SuppressLint("NonConstantResourceId")

@@ -53,7 +53,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
         mAuth = FirebaseAuth.getInstance();
 
-        in_username = findViewById(R.id.in_username);
+        in_username = findViewById(R.id.in_phoneNumber);
         in_password = findViewById(R.id.in_password);
         btn_back = findViewById(R.id.btn_back);
         btn_login = findViewById(R.id.btn_login);

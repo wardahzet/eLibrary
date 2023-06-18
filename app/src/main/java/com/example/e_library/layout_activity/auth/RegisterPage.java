@@ -1,29 +1,22 @@
 package com.example.e_library.layout_activity.auth;
 
-import static android.content.ContentValues.TAG;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.e_library.R;
 import com.example.e_library.layout_activity.Home;
 import com.example.e_library.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
@@ -40,7 +33,7 @@ public class RegisterPage extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_register_page);
 
-        in_username = findViewById(R.id.in_username);
+        in_username = findViewById(R.id.in_phoneNumber);
         in_email = findViewById(R.id.in_email);
         in_password = findViewById(R.id.in_password);
         in_confPass = findViewById(R.id.in_confPassword);
@@ -52,7 +45,7 @@ public class RegisterPage extends AppCompatActivity implements View.OnClickListe
 
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
+        databaseReference = firebaseDatabase.getReference().child("user");
     }
 
     @Override
@@ -71,14 +64,11 @@ public class RegisterPage extends AppCompatActivity implements View.OnClickListe
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this, task -> {
                 if (task.isSuccessful()) {
-                    Log.d(TAG, "createUserWithEmail:success");
                     FirebaseUser user = mAuth.getCurrentUser();
                     User userNew = new User(in_username.getText().toString(), in_email.getText().toString());
                     databaseReference.child(user.getUid()).setValue(userNew);
                     updateUI(user);
-                    assert user != null;
                 } else {
-                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
                     Toast.makeText(RegisterPage.this,
                             Objects.requireNonNull(task.getException()).toString(),
                             Toast.LENGTH_SHORT).show();

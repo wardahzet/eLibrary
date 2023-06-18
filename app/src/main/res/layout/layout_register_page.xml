@@ -54,7 +54,7 @@
             />
 
         <EditText
-            android:id="@+id/in_username"
+            android:id="@+id/in_phoneNumber"
             android:layout_width="344dp"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"

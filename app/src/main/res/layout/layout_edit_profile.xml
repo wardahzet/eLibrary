@@ -120,17 +120,18 @@
             android:fontFamily="sans-serif-medium"
             android:textStyle="bold"
             />
+
         <EditText
-            android:id="@+id/in_username"
+            android:id="@+id/in_phoneNumber"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/in_bg_edit_prof"
             android:drawableRight="@drawable/in_verified"
+            android:inputType="number"
+            android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:text="0896168768790"
-            android:inputType="text"
-            android:paddingLeft="20dp"
             android:textColor="@color/black"
             android:textColorHint="#767676" />
 
