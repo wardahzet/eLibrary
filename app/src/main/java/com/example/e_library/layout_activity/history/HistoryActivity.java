@@ -63,7 +63,6 @@ public class HistoryActivity extends AppCompatActivity {
                         }
                         adapterHistory = new AdapterHistory(rents);
                         recyclerView.setAdapter(adapterHistory);
-                        Log.d("sdjgggjv", String.valueOf(rents.size()));
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {

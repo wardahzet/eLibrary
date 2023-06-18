@@ -1,5 +1,7 @@
 package com.example.e_library.layout_activity.history;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +14,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_library.R;
 import com.example.e_library.model.Rent;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.ViewHolder> {
     List<Rent> rents;
+    FirebaseStorage storage;
     public AdapterHistory(List<Rent> data){
         this.rents = data;
+
+        storage = FirebaseStorage.getInstance();
     }
     @NonNull
     @Override
@@ -34,6 +43,16 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.ViewHold
 
         holder.booktitle.setText(rent.getBook().getTitle());
         holder.bookauthor.setText(rent.getBook().getAuthor());
+        StorageReference reference = storage.getReference("books_cover/" + rent.getBook().getCover());
+        try {
+            File img = File.createTempFile("tempImage",rent.getBook().getCover().endsWith("jpg") ? "jpg" : "png");
+            reference.getFile(img).addOnSuccessListener(taskSnapshot -> {
+                Bitmap bitmap = BitmapFactory.decodeFile(img.getAbsolutePath());
+                holder.bookcover.setImageBitmap(bitmap);
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

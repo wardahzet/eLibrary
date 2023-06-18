@@ -102,7 +102,8 @@ public class CheckoutActivity extends AppCompatActivity {
             databaseReference.child("rent").push().setValue(rent)
                     .addOnSuccessListener(this, unused ->
                             databaseReference.child("wishlist")
-                            .child(book.getIsbn()).removeValue()).addOnFailureListener(this, e -> {
+                            .child(book.getIsbn()).removeValue())
+                    .addOnFailureListener(this, e -> {
                         Toast.makeText(CheckoutActivity.this, "Error",
                                 Toast.LENGTH_SHORT).show();
                         finish();
