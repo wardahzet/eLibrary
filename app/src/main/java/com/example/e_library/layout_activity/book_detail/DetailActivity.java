@@ -104,6 +104,9 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
             rents.add(book);
             Intent intent = new Intent(DetailActivity.this, CheckoutActivity.class);
             intent.putExtra("books", (ArrayList<Book>) rents);
+            startActivity(intent);
+            finish();
+
         } else if (view.getId() == R.id.btn_wishlist) {
             storeWishlist();
         }
@@ -122,6 +125,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                                         && Objects.equals(rent.getBook().getIsbn(), book.getIsbn())) {
                                     Toast.makeText(DetailActivity.this
                                             ,"Anda sudah meminjam buku" + book.getKey(), Toast.LENGTH_SHORT).show();
+                                    finish();
+                                    startActivity(getIntent());
 
                                 }
                             }

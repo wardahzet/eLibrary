@@ -82,6 +82,7 @@ public class CheckoutActivity extends AppCompatActivity {
                 txt_name.setText(user.getName());
                 txt_email.setText(user.getEmail());
                 txt_id.setText(user.getStudentId());
+                txt_phone.setText(user.getPhoneNumber());
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

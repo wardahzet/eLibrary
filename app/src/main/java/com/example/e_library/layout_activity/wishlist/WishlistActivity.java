@@ -130,11 +130,10 @@ public class WishlistActivity extends AppCompatActivity {
                                     if ((rent.getStatus().equals("Dipesan") || rent.getStatus().equals("Dipinjam"))
                                             && Objects.equals(rent.getBook().getIsbn(), book.getIsbn())) {
                                         Toast.makeText(WishlistActivity.this
-                                                ,"Anda sudah meminjam buku" + book.getKey(), Toast.LENGTH_SHORT).show();
+                                                , "Anda sudah meminjam buku" + book.getKey(), Toast.LENGTH_SHORT).show();
                                         finish();
                                         startActivity(getIntent());
                                     }
-
                                 }
                             }
                         }
