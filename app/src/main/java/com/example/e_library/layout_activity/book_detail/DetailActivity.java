@@ -96,7 +96,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View view){
         if (view.getId() == R.id.btn_back){
-            startActivity(new Intent(DetailActivity.this, Home.class));
             finish();
         } else if (view.getId() == R.id.btn_borrow) {
             storeRent();

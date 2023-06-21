@@ -39,13 +39,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private CircleImageView ic_profileImg;
     private TextView txt_name1,txt_studentID1,txt_editProfile,
             txt_name2, txt_studentID2,
-            txt_email,txt_pwd;
+            txt_email,txt_username;
     Button btn_back,btn_history,btn_logout;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
     private User user;
-    private FirebaseUser mAuthUser;
     private FirebaseStorage storageReference;
 
     @SuppressLint("MissingInflatedId")
@@ -63,6 +62,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         txt_studentID2 =findViewById(R.id.txt_studentID2);
         txt_email =findViewById(R.id.txt_Email);
         btn_back = findViewById(R.id.btn_back);
+        txt_username = findViewById(R.id.txt_Username);
         btn_history = findViewById(R.id.btn_history);
         btn_logout = findViewById(R.id.btn_logout);
 
@@ -80,6 +80,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     txt_studentID1.setText(user.getStudentId());
                     txt_studentID2.setText(user.getStudentId());
                     txt_email.setText(user.getEmail());
+                    txt_username.setText(user.getPhoneNumber());
                     if(!user.getPhoto().isEmpty()) setImage(user.getPhoto());
             }
             @Override
@@ -115,7 +116,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
            startActivity(new Intent(ProfileActivity.this, EditProfile.class));
        }
        else if (view.getId() == R.id.btn_back) {
-           startActivity(new Intent(ProfileActivity.this, Home.class));
+           finish();
        }
        else if (view.getId() == R.id.btn_history) {
            startActivity(new Intent(ProfileActivity.this, HistoryActivity.class));

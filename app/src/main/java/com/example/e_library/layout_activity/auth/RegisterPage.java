@@ -47,11 +47,17 @@ public class RegisterPage extends AppCompatActivity implements View.OnClickListe
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("user");
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
 
     @Override
     public void onClick(View view) {
        if (view.getId() == R.id.btn_back) {
-           startActivity(new Intent(RegisterPage.this, OnBoarding.class));
+           finish();
        } else {
            signUp(in_email.getText().toString(), in_password.getText().toString());
        }

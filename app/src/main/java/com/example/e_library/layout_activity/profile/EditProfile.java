@@ -22,6 +22,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.e_library.R;
+import com.example.e_library.layout_activity.AdapterHome;
+import com.example.e_library.layout_activity.Home;
+import com.example.e_library.model.Book;
+import com.example.e_library.model.Rent;
 import com.example.e_library.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -35,6 +39,7 @@ import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -49,6 +54,8 @@ public class EditProfile extends AppCompatActivity{
     private FirebaseAuth mAuth;
     private User user;
     private Uri imgUri;
+    private ArrayList<Rent> rents = new ArrayList<>();
+    private ArrayList<Book> wishlists = new ArrayList<>();
     private FirebaseStorage storage;
     private ActivityResultLauncher<String> cropImage;
     @SuppressLint("MissingInflatedId")
@@ -78,10 +85,6 @@ public class EditProfile extends AppCompatActivity{
 
         txt_changePhoto.setOnClickListener(v -> {
             cropImage.launch("image/*");
-//            Intent intent = new Intent(Intent.ACTION_PICK);
-////            intent.setType("img/*");
-//            intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//            startActivityForResult(intent,100);
         });
         btn_save.setOnClickListener(v -> change());
     }
@@ -96,36 +99,69 @@ public class EditProfile extends AppCompatActivity{
                 imgUri = Uri.parse(result);
             }
             Toast.makeText(EditProfile.this, String.valueOf(imgUri), Toast.LENGTH_SHORT).show();
-            Log.d("TAG", String.valueOf(imgUri));
             image.setImageURI(imgUri);
         } else if (resultCode == UCrop.RESULT_ERROR) {
             final Throwable cropError = UCrop.getError(data);
         }
     }
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == 100 && data != null && data.getData() != null) {
-//             imgUri = data.getData();
-//             image.setImageURI(imgUri);
-//        }
-//    }
     private void change() {
         user.setName(in_name.getText().toString());
         user.setPhoneNumber(in_email.getText().toString());
         user.setStudentId(in_studentID.getText().toString());
         user.setPhoto(uploadImage());
+        databaseReference.child("rent").addValueEventListener(new ValueEventListener(){
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
+                    rents = new ArrayList<>();
+                    for (DataSnapshot item : snapshot.getChildren()) {
+                        Rent rent = item.getValue(Rent.class);
+                        rents.add(rent);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        databaseReference.child("wishlist").addValueEventListener(new ValueEventListener(){
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.e("shapshot ada",snapshot.exists() ? "yes" : "no");
+                if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
+                    wishlists = new ArrayList<>();
+                    for (DataSnapshot item : snapshot.getChildren()) {
+                        Book wishlist = item.getValue(Book.class);
+                        wishlists.add(wishlist);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         databaseReference.setValue(user)
                 .addOnSuccessListener(this, unused -> {
                     Toast.makeText(EditProfile.this, "Berhasil update Profile",
                             Toast.LENGTH_SHORT).show();
+                    if (wishlists.size() > 0) {
+                        for (Book wishlist : wishlists) {
+                            databaseReference.child("wishlist").child(wishlist.getIsbn()).setValue(wishlist);
+                        }
+                    }
+                    if (rents.size() > 0) {
+                        for (Rent rent : rents) {
+                            databaseReference.child("rent").child(rent.getId()).setValue(rent);
+                        }
+                    }
                     finish();
                 })
                 .addOnFailureListener(this, e ->
                         Toast.makeText(EditProfile.this, "Error",
                                 Toast.LENGTH_SHORT).show());
+
     }
 
     private String uploadImage() {

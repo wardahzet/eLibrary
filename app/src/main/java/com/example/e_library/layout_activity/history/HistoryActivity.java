@@ -2,6 +2,8 @@ package com.example.e_library.layout_activity.history;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +31,7 @@ public class HistoryActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
+    ImageButton back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,8 @@ public class HistoryActivity extends AppCompatActivity {
 
         layoutManager = new GridLayoutManager(this,1);
         recyclerView.setLayoutManager(layoutManager);
+        back = findViewById(R.id.btn_back);
+        back.setOnClickListener(v -> finish());
 
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();

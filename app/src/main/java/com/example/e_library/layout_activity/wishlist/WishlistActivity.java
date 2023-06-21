@@ -48,7 +48,7 @@ public class WishlistActivity extends AppCompatActivity {
         btn_back = findViewById(R.id.btn_back);
         btn_checkout = findViewById(R.id.btn_checkout);
 
-        btn_back.setOnClickListener(v -> startActivity(new Intent(WishlistActivity.this, Home.class)));
+        btn_back.setOnClickListener(v -> finish());
         btn_checkout.setOnClickListener(v -> checkout());
 
         recyclerView = findViewById(R.id.rv_wishlist);
